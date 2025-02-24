@@ -1,0 +1,114 @@
+body {
+  margin: 0 auto;
+  font-family: 'Futura', Helvetica, sans-serif;
+}
+
+header {
+  margin: 0;
+  padding: 20px;
+}
+
+main {
+  padding: 10px;
+}
+
+/* button styling */
+button {
+  padding: 8px 16px;
+  border-radius: 50px;
+  box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.25);
+  margin-right: 10px;
+}
+
+.btn-filter {
+  background-color: #CCFFE2;
+  color: #0018A4;
+  border: 2px solid #CCFFE2;
+}
+
+.btn-filter:active {
+  background-color: #0018A4;
+  color: #FFFFFF;
+}
+
+.btn-filter:hover {
+  border: 2px solid #0018A4;
+}
+
+.btn-sort {
+  background-color: #FFECEA;
+  color: #0018A4;
+  border: 2px solid #FFECEA;
+}
+
+.btn-sort:hover {
+  background-color: #FF6589;
+  color: #FFFFFF;
+  border: 2px solid #0018A4;
+}
+
+.btn-sort:active {
+  background-color: #FF6589;
+  color: #FFFFFF;
+  border: 2px solid #FF6589;
+}
+
+.card-parent {
+  display: grid;
+  align-content: start;
+  justify-content: space-around;
+  padding: 10px;
+  margin: 40px 10px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  gap: 10px;
+}
+
+.card {
+  border: 1px solid #E9E9E9;
+  border-radius: 16px;
+  padding: 15px;
+}
+
+.card:hover {
+  box-shadow: 4px 1px 10px 1px rgba(0, 0, 0, 0.25);
+  border: 1px solid #0018A4;
+}
+
+.card-image {
+  width: 100%;
+}
+
+h1 {
+  color: #0018A4;
+  font-size: 64px;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+p {
+  font-size: 16px;
+}
+
+ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+span {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.instructions {
+  border-top: 1px solid #E9E9E9;
+  border-bottom: 1px solid #E9E9E9;
+}
