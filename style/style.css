@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0 auto;
   font-family: 'Futura', Helvetica, sans-serif;
@@ -5,11 +9,17 @@ body {
 
 header {
   margin: 0;
-  padding: 20px;
+  padding: 16px;
 }
 
 main {
-  padding: 10px;
+  padding: 16px;
+}
+
+.filter-kitchen {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 /* button styling */
@@ -17,7 +27,7 @@ button {
   padding: 8px 16px;
   border-radius: 50px;
   box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.25);
-  margin-right: 10px;
+  margin: 8px;
 }
 
 .btn-filter {
@@ -53,21 +63,22 @@ button {
   border: 2px solid #FF6589;
 }
 
+/* Cards styling */
+
 .card-parent {
   display: grid;
   align-content: start;
   justify-content: space-around;
-  padding: 10px;
-  margin: 40px 10px;
+  margin-top: 40px;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
-  gap: 10px;
+  gap: 24px;
 }
 
 .card {
   border: 1px solid #E9E9E9;
   border-radius: 16px;
-  padding: 15px;
+  padding: 12px;
 }
 
 .card:hover {
@@ -86,11 +97,15 @@ h1 {
 
 h2 {
   font-size: 22px;
+  border-bottom: 1px solid #E9E9E9;
+  padding: 16px 0px;
+  margin: 0;
 }
 
-h3 {
+.title {
   font-size: 18px;
   font-weight: bold;
+  margin-right: 8px;
 }
 
 p {
@@ -103,12 +118,29 @@ ul {
   padding-left: 0;
 }
 
-span {
-  font-weight: bold;
-  font-size: 18px;
+.instructions {
+  display: flex;
+
+  align-items: center;
 }
 
-.instructions {
+.ingredients {
   border-top: 1px solid #E9E9E9;
-  border-bottom: 1px solid #E9E9E9;
+}
+
+
+/* Desktop screen size */
+
+@media (min-width: 1024px) {
+
+  .form {}
+
+  .card-parent {
+
+    justify-content: space-around;
+    margin-top: 40px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+
+  }
 }
