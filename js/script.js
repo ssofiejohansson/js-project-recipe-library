@@ -63,7 +63,7 @@ const sortReceipes = () => {
   }
 }
 
-// Eventlisteners always at the end
+// Eventlisteners
 veganBtn.addEventListener("change", updateDietChoice)
 vegetarianBtn.addEventListener("change", updateDietChoice)
 glutenFreeBtn.addEventListener("change", updateDietChoice)
