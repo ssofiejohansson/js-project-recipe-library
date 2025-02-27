@@ -7,6 +7,10 @@
     name="viewport"
     content="width=device-width, initial-scale=1.0"
   >
+  <script
+    src="https://kit.fontawesome.com/beb1bc6f21.js"
+    crossorigin="anonymous"
+  ></script>
   <link
     rel="stylesheet"
     href="./style/style.css"
@@ -21,99 +25,152 @@
 
   <main>
 
-
-
-    <form class="form">
-
-      <label>
-        <p>Filter on diet</p>
-      </label>
-      <div class="filter-kitchen">
-        <button
-          type="button"
-          class="btn-filter"
-          id="allDietsBtn"
-        >All</button>
-        <button
-          type="button"
-          class="btn-filter"
+    <form id="filterForm">
+      <div class="form">
+        <p>Filter on Diet</p>
+        <label
           id="veganBtn"
-        >Vegan</button>
-        <button
-          type="button"
-          class="btn-filter"
+          class="veganBtn button btn-filter"
+        >
+          <input
+            type="checkbox"
+            name="diet"
+            value="Vegan"
+          >🌱 Vegan
+        </label>
+        <label
           id="vegetarianBtn"
-        >Vegetarian</button>
-        <button
-          type="button"
-          class="btn-filter"
-          id="dairyFreeBtn"
-        >Dairy-free</button>
-        <button
-          type="button"
-          class="btn-filter"
+          class="button btn-filter"
+        >
+          <input
+            type="checkbox"
+            name="diet"
+            value="Vegetarian"
+          >🥕 Vegetarian
+        </label>
+        <label
           id="glutenFreeBtn"
-        >Gluten-free</button>
+          class="button btn-filter"
+        >
+          <input
+            type="checkbox"
+            name="diet"
+            value="Gluten-Free"
+          >🌾 Gluten-Free
+        </label>
+        <label
+          id="dairyFreeBtn"
+          class="button btn-filter"
+        >
+          <input
+            type="checkbox"
+            name="diet"
+            value="Dairy-Free"
+          >🧀 Dairy-Free
+        </label>
       </div>
 
-
-
-
-      <label>
-        <p>Filter on cooking time</p>
-      </label>
-      <div class="sort-time">
-        <button
-          type="button"
-          class="btn-filter"
+      <div class="form">
+        <p>Filter on Cooking Time</p>
+        <label
+          id="under15minBtn"
+          class="button btn-filter"
         >
-          < 15min</button>
-            <button
-              type="button"
-              class="btn-filter"
-            >15-30min</button>
-            <button
-              type="button"
-              class="btn-filter"
+          <input
+            type="checkbox"
+            name="cookingTime"
+            value="Under 15 min"
+          >
+          🕒 <
+            15
+            min
+            </label
+          >
+            <label
+              id="between15and30minBtn"
+              class="button btn-filter"
             >
-              >30-60min</button>
-            <button
-              type="button"
-              class="btn-filter"
-            > > 60min</button>
+              <input
+                type="checkbox"
+                name="cookingTime"
+                value="15-30 min"
+              >🕑 15-30 min
+            </label>
+            <label
+              id="between30and60minBtn"
+              class="button btn-filter"
+            >
+              <input
+                type="checkbox"
+                name="cookingTime"
+                value="30-60 min"
+              >🕛 30-60 min
+            </label>
+            <label
+              id="over60minBtn"
+              class="button btn-filter"
+            >
+              <input
+                type="checkbox"
+                name="cookingTime"
+                value="Over 60 min"
+              >🕓 60 min >
+            </label>
       </div>
-
-      <label>
-        <p>Sort by popularity</p>
-      </label>
-      <div class="sort-time">
-        <button
-          type="button"
-          class="btn-sort"
-        >
-          Ascending</button>
-        <button
-          type="button"
-          class="btn-sort"
-        >Descending</button>
-
-      </div>
-
     </form>
+
+
+    <form id="sortForm">
+      <div class="form">
+        <p>Sort by popularity</p>
+        <label
+          id="mostPopular"
+          class="button btn-sort"
+        >Top Picks 🌟
+          <input
+            type="radio"
+            name="popularity"
+            value="mostPopular"
+          >
+        </label>
+        <label
+          id="leastPopular"
+          class="button btn-sort"
+        >Hidden Gems 💎
+          <input
+            type="radio"
+            name="popularity"
+            value="leastPopular"
+          >
+        </label>
+      </div>
+    </form>
+    <div id="sort"></div>
 
     <div class="card-parent">
 
       <div
         class="card"
-        id="recipeCard"
+        id=""
       >
-        <img
-          src="./img/food2.jpg"
-          alt=""
-          class="card-image"
-          id="cardImage"
-        >
-        <h2 id="foodTitle"></h2>
+        <h2 class="">Selected receipes</h2>
+        <div id="dietChoice"></div>
+        <h2 class="">Chosen time frame</h2>
+        <div id="timeChoice"></div>
+      </div>
+
+      <div
+        class="card"
+        id=""
+      >
+        <div class="card-image">
+          <img
+            src="./img/veganplate.webp"
+            alt=""
+            id="cardImage"
+          >
+        </div>
+        <h2 id="food-title">Food Title</h2>
 
         <div class="instructions">
           <h3 class="title">Diet:</h3>
@@ -123,41 +180,8 @@
         <div class="instructions">
           <h3 class="title">Time:</h3>
           <div id="cookingTime"></div>
-          <p>min</p>
+          <p></p>
 
-        </div>
-
-        <div class="ingredients">
-          <h4 class="title">Ingredients</h4>
-
-          <ul id="ingredientList">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
-
-        </div>
-      </div>
-      <div
-        class="card"
-        id=""
-      >
-        <img
-          src="./img/food1.jpg"
-          alt=""
-          class="card-image"
-          id=""
-        >
-        <h2 id="food-title">Food Title</h2>
-
-        <div class="instructions">
-          <h3 class="title">Diet:</h3>
-          <p>type</p>
-        </div>
-        <div class="instructions">
-          <h3 class="title">Time:</h3>
-          <p>x minutes</p>
         </div>
 
         <div class="ingredients">
@@ -173,15 +197,84 @@
         </div>
       </div>
 
+      <div
+        class="card"
+        id=""
+      >
+        <div class="card-image">
+          <img
+            src="./img/veggiebreakfast.webp"
+            alt=""
+            id=""
+          >
+        </div>
+        <h2 id="food-title">Food Title</h2>
+
+        <div class="instructions">
+          <h3 class="title">Diet:</h3>
+        </div>
+        <div class="instructions">
+          <h3 class="title">Time:</h3>
+        </div>
+
+        <div class="ingredients">
+          <h4 class="title">Ingredients</h4>
+
+          <ul id="ingredient-list">
+            <li>ingredient 1</li>
+            <li>ingredient 2</li>
+            <li>ingredient 3</li>
+            <li>ingredient 4</li>
+          </ul>
+
+        </div>
+      </div>
+      <div
+        class="card"
+        id=""
+      >
+        <div class="card-image">
+          <img
+            src="./img/veggieplate.webp"
+            alt=""
+            id=""
+          >
+        </div>
+        <h2 id="food-title">Food Title</h2>
+
+        <div class="instructions">
+          <h3 class="title">Diet:</h3>
+          <p>x </p>
+        </div>
+        <div class="instructions">
+          <h3 class="title">Time:</h3>
+          <p>x min</p>
+        </div>
+
+        <div class="ingredients">
+          <h4 class="title">Ingredients</h4>
+
+          <ul id="ingredient-list">
+            <li>ingredient 1</li>
+            <li>ingredient 2</li>
+            <li>ingredient 3</li>
+            <li>ingredient 4</li>
+          </ul>
+
+        </div>
+      </div>
 
     </div>
 
   </main>
 
-
-
   <footer>
-
+    <div class="icons">
+      <p>Project by:
+        <a href="https://github.com/ssofiejohansson"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/sofie-j-011155310/"><i class="fa-brands fa-linkedin"></i></a>
+      </p>
+    </div>
   </footer>
 
   <script src="./js/script.js"></script>
