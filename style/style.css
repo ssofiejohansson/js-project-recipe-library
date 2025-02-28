@@ -74,6 +74,11 @@ label input {
   border: 2px solid #FF6589;
 }
 
+.sort-option {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
 /* Cards styling */
 
 .card-parent {
