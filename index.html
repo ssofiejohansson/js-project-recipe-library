@@ -29,6 +29,16 @@
       <div class="form">
         <p>Filter on Diet</p>
         <label
+          id="allBtn"
+          class="allBtn button btn-filter"
+        >
+          <input
+            type="checkbox"
+            name="diet"
+            value="All"
+          >All
+        </label>
+        <label
           id="veganBtn"
           class="veganBtn button btn-filter"
         >
@@ -119,7 +129,6 @@
       </div>
     </form>
 
-
     <form id="sortForm">
       <div class="form">
         <p>Sort by popularity</p>
@@ -146,128 +155,16 @@
       </div>
 
     </form>
+
     <div
       class="sort-option"
       id="sort"
     ></div>
-    <div class="card-parent">
 
-      <div
-        class="card"
-        id=""
-      >
-        <h2 class="">Selected receipes</h2>
-        <div id="dietChoice"></div>
-        <h2 class="">Chosen time frame</h2>
-        <div id="timeChoice"></div>
-      </div>
-
-      <div
-        class="card"
-        id=""
-      >
-        <div class="card-image">
-          <img
-            src="./img/veganplate.webp"
-            alt=""
-            id="cardImage"
-          >
-        </div>
-        <h2 id="food-title">Food Title</h2>
-
-        <div class="instructions">
-          <h3 class="title">Diet:</h3>
-          <div id="dietType"></div>
-
-        </div>
-        <div class="instructions">
-          <h3 class="title">Time:</h3>
-          <div id="cookingTime"></div>
-          <p></p>
-
-        </div>
-
-        <div class="ingredients">
-          <h4 class="title">Ingredients</h4>
-
-          <ul id="ingredient-list">
-            <li>ingredient 1</li>
-            <li>ingredient 2</li>
-            <li>ingredient 3</li>
-            <li>ingredient 4</li>
-          </ul>
-
-        </div>
-      </div>
-
-      <div
-        class="card"
-        id=""
-      >
-        <div class="card-image">
-          <img
-            src="./img/veggiebreakfast.webp"
-            alt=""
-            id=""
-          >
-        </div>
-        <h2 id="food-title">Food Title</h2>
-
-        <div class="instructions">
-          <h3 class="title">Diet:</h3>
-        </div>
-        <div class="instructions">
-          <h3 class="title">Time:</h3>
-        </div>
-
-        <div class="ingredients">
-          <h4 class="title">Ingredients</h4>
-
-          <ul id="ingredient-list">
-            <li>ingredient 1</li>
-            <li>ingredient 2</li>
-            <li>ingredient 3</li>
-            <li>ingredient 4</li>
-          </ul>
-
-        </div>
-      </div>
-      <div
-        class="card"
-        id=""
-      >
-        <div class="card-image">
-          <img
-            src="./img/veggieplate.webp"
-            alt=""
-            id=""
-          >
-        </div>
-        <h2 id="food-title">Food Title</h2>
-
-        <div class="instructions">
-          <h3 class="title">Diet:</h3>
-          <p>x </p>
-        </div>
-        <div class="instructions">
-          <h3 class="title">Time:</h3>
-          <p>x min</p>
-        </div>
-
-        <div class="ingredients">
-          <h4 class="title">Ingredients</h4>
-
-          <ul id="ingredient-list">
-            <li>ingredient 1</li>
-            <li>ingredient 2</li>
-            <li>ingredient 3</li>
-            <li>ingredient 4</li>
-          </ul>
-
-        </div>
-      </div>
-
-    </div>
+    <div
+      id="cards"
+      class="card-parent"
+    ></div>
 
   </main>
 

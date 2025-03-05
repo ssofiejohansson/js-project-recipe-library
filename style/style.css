@@ -86,16 +86,19 @@ label input {
   align-content: start;
   justify-content: space-around;
   gap: 24px;
-  grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 23%, 340px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(clamp(300px, 23%, 340px), 1fr));
   max-width: 1400px;
   margin: 0 auto;
   padding: 24px 0px;
 }
 
 .card {
+  /* possibly remove the max/min width*/
+  /* max-width: 360px;
+  min-width: 280px; */
   border: 2px solid #E9E9E9;
   border-radius: 16px;
-  padding: 12px;
+  padding: 16px;
 }
 
 .card:hover {
@@ -144,6 +147,7 @@ ul {
   margin-left: 0;
   padding-left: 0;
 }
+
 
 .instructions {
   display: flex;
