@@ -34,7 +34,7 @@
             type="radio"
             name="diet"
             value="all"
-          > All
+          > 🍽️ All
         </label>
         <label class="button btn-filter">
           <input
@@ -63,6 +63,24 @@
             name="diet"
             value="dairy-free"
           > 🧀 Dairy-Free
+        </label>
+      </div>
+
+      <div class="form">
+        <p>Sort by popularity</p>
+        <label class="button btn-sort">
+          <input
+            type="radio"
+            name="timeFilter"
+            value="ascending"
+          > Most popular 🏆
+        </label>
+        <label class="button btn-sort">
+          <input
+            type="radio"
+            name="timeFilter"
+            value="descending"
+          > Hidden gems 💎
         </label>
       </div>
     </form>
@@ -105,32 +123,21 @@
       </div>
     </form> -->
 
-    <!-- Sorting Form -->
-    <form id="sortForm">
-      <div class="form">
-        <p>Sort by popularity</p>
-        <label class="button btn-sort">
-          <input
-            type="radio"
-            name="timeFilter"
-            value="ascending"
-          > Most popular 🌟
-        </label>
-        <label class="button btn-sort">
-          <input
-            type="radio"
-            name="timeFilter"
-            value="descending"
-          > Hidden gems 💎
-        </label>
-      </div>
-    </form>
 
+    <div>
+      <p>In need for Inspo?</p>
+      <button
+        class="button btn-random"
+        id="randomBtn"
+      >✨ Surprise me ✨</button>
 
-    <div
-      class="sort-option"
-      id="sort"
-    ></div>
+      <p
+        class="title"
+        id="displayMessage"
+      >
+      </p>
+    </div>
+
 
     <div
       id="cards"

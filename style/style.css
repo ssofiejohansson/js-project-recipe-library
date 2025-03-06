@@ -11,31 +11,38 @@ header {
   border-bottom: 1px solid #E9E9E9;
 }
 
+/* max-width makes the content look good on larger screens */
 main {
-  margin: 16px 8px;
-  padding: 8px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 16px 24px;
 }
 
 form {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 23%, 340px), 1fr));
-  max-width: 1400px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   margin: 0 auto;
   gap: 12px;
   padding-bottom: 16px;
 }
 
-/* button styling */
-label {
+/* hide the "no recipe found" message */
+#displayMessage {
+  display: none;
+}
+
+/* button/radio input styling */
+.button {
   display: inline-block;
   padding: 8px 16px;
   border-radius: 50px;
-  box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 6px 1px rgba(0, 0, 0, 0.25);
   margin: 8px;
   cursor: pointer;
   user-select: none;
 }
 
+/* hide the input thingy inside my label */
 label input {
   display: none;
 }
@@ -74,28 +81,30 @@ label input {
   border: 2px solid #FF6589;
 }
 
-.sort-option {
-  max-width: 1400px;
-  margin: 0 auto;
+.btn-random {
+  background-color: #FF6589;
+  color: #FFFFFF;
+  border: 2px solid #FF6589;
+}
+
+.btn-random:hover {
+  background-color: #FFECEA;
+  color: #FF6589;
+  border: 2px solid #0018A4;
 }
 
 /* Cards styling */
 
 .card-parent {
   display: grid;
-  /* align-content: start;
-  justify-content: center; */
+  justify-content: center;
+  align-content: space-around;
   gap: 24px;
-  grid-template-columns: repeat(auto-fit, minmax(clamp(300px, 23%, 340px), 1fr));
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 24px 0px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+  padding: 24px 0;
 }
 
 .card {
-  /* possibly remove the max/min width*/
-  max-width: 360px;
-  min-width: 280px;
   border: 2px solid #E9E9E9;
   border-radius: 16px;
   padding: 16px;
@@ -127,10 +136,11 @@ h1 {
 }
 
 h2 {
-  font-size: 22px;
+
   border-bottom: 1px solid #E9E9E9;
-  padding: 16px 0px;
+  padding: 16px 0;
 }
+
 
 .title {
   font-size: 18px;
@@ -138,7 +148,8 @@ h2 {
   margin-right: 8px;
 }
 
-p {
+p,
+button {
   font-size: 16px;
 }
 

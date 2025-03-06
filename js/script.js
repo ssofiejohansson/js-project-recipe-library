@@ -1,3 +1,4 @@
+//mockup recipe array
 const recipes = [
   {
     id: 1,
@@ -78,7 +79,7 @@ const recipes = [
     readyInMinutes: 15,
     servings: 2,
     sourceUrl: "https://example.com/dairy-free-tacos",
-    diets: ["dairy-free"],
+    diets: [""],
     cuisine: "Mexican",
     ingredients: [
       "corn tortillas",
@@ -160,12 +161,15 @@ const recipes = [
   }
 ]
 
+//declaring my variables
 const btnDiet = document.querySelectorAll('.btn-filter')
 const sortBtn = document.querySelectorAll('.btn-sort')
-
+const surpriseBtn = document.getElementById('randomBtn')
+const displayMessage = document.getElementById('displayMessage')
 const cardContainer = document.getElementById('cards')
 let filteredRecipes = [...recipes]
 
+//function to load all recipes in array
 const loadRecipes = (recipesToDisplay) => {
   cardContainer.innerHTML = ''
   recipesToDisplay.forEach(recipe => {
@@ -182,7 +186,6 @@ const loadRecipes = (recipesToDisplay) => {
         <div class="instructions">
           <h3 class="title">Time:</h3>
           <p>${recipe.readyInMinutes} min</p>
-          <p>popularity:${recipe.popularity}</p>
         </div>
         <div class="ingredients">
           <h4 class="title">Ingredients</h4>
@@ -194,6 +197,7 @@ const loadRecipes = (recipesToDisplay) => {
   })
 }
 
+//function to filter recipes by diet choice
 const filterByDiet = () => {
   const selectedDiet = document.querySelector('input[name="diet"]:checked').value
 
@@ -203,9 +207,18 @@ const filterByDiet = () => {
     filteredRecipes = recipes.filter(recipe => recipe.diets.includes(selectedDiet))
   }
 
+  // Show message ONLY when the user selects a filter AND no recipes match
+  if (selectedDiet !== 'all' && filteredRecipes.length === 0) {
+    displayMessage.innerHTML = "🍲  ❌ Oh no! No recipes found. Try another filter!"
+    displayMessage.style.display = "block"
+  } else if (filteredRecipes.length > 0) {
+    displayMessage.style.display = "none" // Hide message only if recipes exist
+  }
+
   loadRecipes(filteredRecipes)
 }
 
+//function to sort recipes on popularity
 const filterByPopularity = (number) => {
   const sortedRecipes = [...filteredRecipes]
 
@@ -218,6 +231,13 @@ const filterByPopularity = (number) => {
   loadRecipes(sortedRecipes)
 }
 
+//function for picking a random recipe
+const surpriseMe = () => {
+  const randomRecipe = recipes[Math.floor(Math.random() * recipes.length)]
+  loadRecipes([randomRecipe])
+}
+
+//eventlisteners
 btnDiet.forEach(button => {
   button.addEventListener("change", filterByDiet)
 })
@@ -229,4 +249,7 @@ sortBtn.forEach(button => {
   })
 })
 
+surpriseBtn.addEventListener('click', surpriseMe)
+
+//always load all recipes from the start
 loadRecipes(filteredRecipes)
