@@ -1,26 +1,3 @@
-// defining my variables
-
-const card = document.getElementById("cards")
-
-const allBtn = document.querySelector('#allBtn input')
-const veganBtn = document.querySelector('#veganBtn input')
-const vegetarianBtn = document.querySelector('#vegetarianBtn input')
-const glutenFreeBtn = document.querySelector('#glutenFreeBtn input')
-const dairyFreeBtn = document.querySelector('#dairyFreeBtn input')
-const dietChoice = document.querySelector('#dietChoice')
-
-const under15min = document.querySelector('#under15minBtn input')
-const between15and30min = document.querySelector('#between15and30minBtn input')
-const between30and60min = document.querySelector('#between30and60minBtn input')
-const over60min = document.querySelector('#over60minBtn input')
-const cookingTime = document.querySelector('#timeChoice')
-
-const mostPopular = document.querySelector('#mostPopular input')
-const leastPopular = document.querySelector('#leastPopular input')
-const sort = document.querySelector('#sort')
-
-// Array of mockup receipes
-
 const recipes = [
   {
     id: 1,
@@ -183,101 +160,73 @@ const recipes = [
   }
 ]
 
-const showRecipe = () => {
-  recipes.forEach(item => {
-    card.innerHTML +=
+const btnDiet = document.querySelectorAll('.btn-filter')
+const sortBtn = document.querySelectorAll('.btn-sort')
+
+const cardContainer = document.getElementById('cards')
+let filteredRecipes = [...recipes]
+
+const loadRecipes = (recipesToDisplay) => {
+  cardContainer.innerHTML = ''
+  recipesToDisplay.forEach(recipe => {
+    cardContainer.innerHTML +=
       `<div class="card">
-      <div class="card-image">
-      <img src="./img/veganplate.webp"
-            alt="Vegan plate"
-            id="cardImage"/></div>
-            <h2>${item.title}</h2>
-             <div class="instructions">
-             <h3 class="title">Diet:</h3>
-            <p>${item.diets}</p>
-            </div>
-            <div class="instructions">
-            <h3 class="title">Time:</h3>
-            <p>${item.readyInMinutes} min</p>
-            </div>
-            <div class="ingredients">
-            <h4 class="title">Ingredients</h4>
-              <ul>
-              ${item.ingredients.map(ingredient => `<li>${ingredient}</li>`).join("")}
-              </ul>
-            </div>
-            </div>`
+        <div class="card-image">
+          <img src="./img/veganplate.webp" alt="Vegan plate" id="cardImage"/>
+        </div>
+        <h2>${recipe.title}</h2>
+        <div class="instructions">
+          <h3 class="title">Diet:</h3>
+          <p>${recipe.diets.join(", ")}</p>
+        </div>
+        <div class="instructions">
+          <h3 class="title">Time:</h3>
+          <p>${recipe.readyInMinutes} min</p>
+          <p>popularity:${recipe.popularity}</p>
+        </div>
+        <div class="ingredients">
+          <h4 class="title">Ingredients</h4>
+          <ul>
+            ${recipe.ingredients.map(ingredient => `<li>${ingredient}</li>`).join("")}
+          </ul>
+        </div>
+      </div>`
   })
 }
 
-//naming functions
+const filterByDiet = () => {
+  const selectedDiet = document.querySelector('input[name="diet"]:checked').value
 
-const allDiets = () => {
-  sort.innerHTML = "" // This is to clear the div from the start
-
-  if (allBtn.checked) {
-    sort.innerHTML += `You are looking through all our receipes.`
+  if (selectedDiet === 'all') {
+    filteredRecipes = [...recipes]
+  } else {
+    filteredRecipes = recipes.filter(recipe => recipe.diets.includes(selectedDiet))
   }
 
-}
-showRecipe()
-
-const updateDietChoice = () => {
-  sort.innerHTML = "" // This is to clear the div from the start
-
-  if (veganBtn.checked) {
-    sort.innerHTML += `<p>🥑 Vegan vibes only! Taste the goodness of plant-based meals.</p>`
-  }
-  if (vegetarianBtn.checked) {
-    sort.innerHTML += `<p>🥦 Go green! Discover vibrant and delicious vegetarian recipes for a plant-powered day.</p>`
-  }
-  if (glutenFreeBtn.checked) {
-    sort.innerHTML += `<p>❌🍞 No gluten, no problem! Delicious gluten-free recipes coming your way.</p>`
-  }
-  if (dairyFreeBtn.checked) {
-    sort.innerHTML += `<p>🚫🥛 Explore creamy, dreamy dairy-free recipes.</p>`
-  }
+  loadRecipes(filteredRecipes)
 }
 
-const updateCookingTime = () => {
-  sort.innerHTML = ""
+const filterByPopularity = (number) => {
+  const sortedRecipes = [...filteredRecipes]
 
-  if (under15min.checked) {
-    sort.innerHTML += `<p>⏱️ Quick and tasty! Under 15 minutes of cooking, because time is precious.</p>`
+  if (number === 'descending') {
+    sortedRecipes.sort((a, b) => a.popularity - b.popularity)
+  } else {
+    sortedRecipes.sort((a, b) => b.popularity - a.popularity)
   }
-  if (between15and30min.checked) {
-    sort.innerHTML += `<p>⏲️ Just the right amount of time! Perfect for a maximum 30 minute cooking adventure.</p>`
-  }
-  if (between30and60min.checked) {
-    sort.innerHTML += `<p>🕒 Got a bit more time? Whip up something delicious in less than an hour.</p>`
-  }
-  if (over60min.checked) {
-    sort.innerHTML += `<p>⏳ Slow-cooked perfection! Over 60 minutes for those who love to take their time.</p>`
-  }
+
+  loadRecipes(sortedRecipes)
 }
 
-const sortReceipes = () => {
-  sort.innerHTML = ""
+btnDiet.forEach(button => {
+  button.addEventListener("change", filterByDiet)
+})
 
-  if (mostPopular.checked) {
-    sort.innerHTML += `<p>🔥 Hot right now! Check out the most popular recipes everyone’s raving about:</p>`
-  }
-  if (leastPopular.checked) {
-    sort.innerHTML += `<p>👀 The underdogs! These recipes might be hidden gems:</p>`
-  }
-}
+sortBtn.forEach(button => {
+  button.addEventListener("change", (button) => {
+    const time = button.target.value
+    filterByPopularity(time)
+  })
+})
 
-// Eventlisteners
-allBtn.addEventListener("change", allDiets)
-veganBtn.addEventListener("change", updateDietChoice)
-vegetarianBtn.addEventListener("change", updateDietChoice)
-glutenFreeBtn.addEventListener("change", updateDietChoice)
-dairyFreeBtn.addEventListener("change", updateDietChoice)
-
-under15min.addEventListener("change", updateCookingTime)
-between15and30min.addEventListener("change", updateCookingTime)
-between30and60min.addEventListener("change", updateCookingTime)
-over60min.addEventListener("change", updateCookingTime)
-
-mostPopular.addEventListener("change", sortReceipes)
-leastPopular.addEventListener("change", sortReceipes)
+loadRecipes(filteredRecipes)

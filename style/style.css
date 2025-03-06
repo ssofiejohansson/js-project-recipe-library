@@ -83,8 +83,8 @@ label input {
 
 .card-parent {
   display: grid;
-  align-content: start;
-  justify-content: space-around;
+  /* align-content: start;
+  justify-content: center; */
   gap: 24px;
   grid-template-columns: repeat(auto-fit, minmax(clamp(300px, 23%, 340px), 1fr));
   max-width: 1400px;
@@ -94,8 +94,8 @@ label input {
 
 .card {
   /* possibly remove the max/min width*/
-  /* max-width: 360px;
-  min-width: 280px; */
+  max-width: 360px;
+  min-width: 280px;
   border: 2px solid #E9E9E9;
   border-radius: 16px;
   padding: 16px;
