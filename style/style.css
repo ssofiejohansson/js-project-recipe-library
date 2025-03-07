@@ -90,17 +90,17 @@ label input {
 .btn-random:hover {
   background-color: #FFECEA;
   color: #FF6589;
-  border: 2px solid #0018A4;
+  border: 2px solid #FF6589;
 }
 
 /* Cards styling */
 
 .card-parent {
   display: grid;
-  justify-content: center;
+  justify-content: start;
   align-content: space-around;
   gap: 24px;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 280px));
   padding: 24px 0;
 }
 
@@ -135,8 +135,15 @@ h1 {
   padding: 10px;
 }
 
-h2 {
+a {
+  text-decoration: none;
+}
 
+a:hover {
+  color: #0018A4;
+}
+
+h2 {
   border-bottom: 1px solid #E9E9E9;
   padding: 16px 0;
 }

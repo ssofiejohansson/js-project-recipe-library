@@ -1,4 +1,4 @@
-//mockup recipe array
+//mockup recipe
 const recipes = [
   {
     id: 1,
@@ -169,7 +169,7 @@ const displayMessage = document.getElementById('displayMessage')
 const cardContainer = document.getElementById('cards')
 let filteredRecipes = [...recipes]
 
-//function to load all recipes in array
+//function to load all recipes
 const loadRecipes = (recipesToDisplay) => {
   cardContainer.innerHTML = ''
   recipesToDisplay.forEach(recipe => {
@@ -188,7 +188,7 @@ const loadRecipes = (recipesToDisplay) => {
           <p>${recipe.readyInMinutes} min</p>
         </div>
         <div class="ingredients">
-          <h4 class="title">Ingredients</h4>
+          <h4 class="title">Ingredient list:</h4>
           <ul>
             ${recipe.ingredients.map(ingredient => `<li>${ingredient}</li>`).join("")}
           </ul>
@@ -207,12 +207,12 @@ const filterByDiet = () => {
     filteredRecipes = recipes.filter(recipe => recipe.diets.includes(selectedDiet))
   }
 
-  // Show message ONLY when the user selects a filter AND no recipes match
+  // Show a message when a filter with no recipe is found
   if (selectedDiet !== 'all' && filteredRecipes.length === 0) {
     displayMessage.innerHTML = "🍲  ❌ Oh no! No recipes found. Try another filter!"
     displayMessage.style.display = "block"
   } else if (filteredRecipes.length > 0) {
-    displayMessage.style.display = "none" // Hide message only if recipes exist
+    displayMessage.style.display = "none" // Hide message if recipes are found
   }
 
   loadRecipes(filteredRecipes)
@@ -244,8 +244,8 @@ btnDiet.forEach(button => {
 
 sortBtn.forEach(button => {
   button.addEventListener("change", (button) => {
-    const time = button.target.value
-    filterByPopularity(time)
+    const numberValue = button.target.value
+    filterByPopularity(numberValue)
   })
 })
 
