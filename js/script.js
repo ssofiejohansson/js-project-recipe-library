@@ -19,13 +19,13 @@ const fetchRecipes = () => {
       console.error('Error:', error)
     })
 }
-//display fetched recipes
+//Display fetched recipes
 const displayRecipes = (recipesToDisplay) => {
   const cardContainer = document.querySelector('#cards')
   cardContainer.innerHTML = ''
 
   recipesToDisplay.forEach(recipe => {
-    // Build diet labels dynamically (only show when true)
+
     let dietLabels = []
     if (recipe.vegan) dietLabels.push("Vegan")
     if (recipe.vegetarian) dietLabels.push("Vegetarian")
@@ -84,30 +84,28 @@ const sortByReadyTime = (order) => {
   displayRecipes(filteredRecipes)
 }
 
-// Function to pick and display a random recipe
+// Function to display a random recipe
 const surpriseMe = () => {
   if (allRecipes.length > 0) {
     const randomRecipe = allRecipes[Math.floor(Math.random() * allRecipes.length)]
-    displayRecipes([randomRecipe]) // Display only the selected random recipe
+    displayRecipes([randomRecipe])
   }
 }
 
-// Event listeners for diet filters
+// Event listeners
 document.querySelectorAll('.btn-filter input').forEach(button => {
   button.addEventListener("change", (event) => {
     filterByDiet(event.target.value)
   })
 })
 
-// Event listeners for sorting by time
 document.querySelectorAll('.btn-sort input').forEach(button => {
   button.addEventListener("change", (event) => {
     sortByReadyTime(event.target.value)
   })
 })
 
-// Event listener for the "Surprise Me" button
 document.querySelector('#randomBtn').addEventListener("click", surpriseMe)
 
-// Fetch and display recipes on page load
+// Display recipes
 fetchRecipes()
