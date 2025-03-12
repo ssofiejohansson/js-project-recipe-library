@@ -1,187 +1,46 @@
-//mockup recipe
-const recipes = [
-  {
-    id: 1,
-    title: "Vegan Lentil Soup",
-    image: "./chicken.webp",
-    readyInMinutes: 30,
-    servings: 4,
-    sourceUrl: "https://example.com/vegan-lentil-soup",
-    diets: ["vegan"],
-    cuisine: "Mediterranean",
-    ingredients: [
-      "red lentils",
-      "carrots",
-      "onion",
-      "garlic",
-      "tomato paste",
-      "cumin",
-      "paprika",
-      "vegetable broth",
-      "olive oil",
-      "salt"
-    ],
-    pricePerServing: 2.5,
-    popularity: 85
-  },
-  {
-    id: 2,
-    title: "Vegetarian Pesto Pasta",
-    image: "./chicken.webp",
-    readyInMinutes: 25,
-    servings: 2,
-    sourceUrl: "https://example.com/vegetarian-pesto-pasta",
-    diets: ["vegetarian"],
-    cuisine: "Italian",
-    ingredients: [
-      "pasta",
-      "basil",
-      "parmesan cheese",
-      "garlic",
-      "pine nuts",
-      "olive oil",
-      "salt",
-      "black pepper"
-    ],
-    pricePerServing: 3.0,
-    popularity: 92
-  },
-  {
-    id: 3,
-    title: "Gluten-Free Chicken Stir-Fry",
-    image: "./chicken.webp",
-    readyInMinutes: 20,
-    servings: 3,
-    sourceUrl: "https://example.com/gluten-free-chicken-stir-fry",
-    diets: ["gluten-free"],
-    cuisine: "Asian",
-    ingredients: [
-      "chicken breast",
-      "broccoli",
-      "bell pepper",
-      "carrot",
-      "soy sauce (gluten-free)",
-      "ginger",
-      "garlic",
-      "sesame oil",
-      "cornstarch",
-      "green onion",
-      "sesame seeds",
-      "rice"
-    ],
-    pricePerServing: 4.0,
-    popularity: 78
-  },
-  {
-    id: 4,
-    title: "Dairy-Free Tacos",
-    image: "./chicken.webp",
-    readyInMinutes: 15,
-    servings: 2,
-    sourceUrl: "https://example.com/dairy-free-tacos",
-    diets: [""],
-    cuisine: "Mexican",
-    ingredients: [
-      "corn tortillas",
-      "ground beef",
-      "taco seasoning",
-      "lettuce",
-      "tomato",
-      "avocado"
-    ],
-    pricePerServing: 2.8,
-    popularity: 88
-  },
-  {
-    id: 5,
-    title: "Middle Eastern Hummus",
-    image: "./chicken.webp",
-    readyInMinutes: 10,
-    servings: 4,
-    sourceUrl: "https://example.com/middle-eastern-hummus",
-    diets: ["vegan", "gluten-free"],
-    cuisine: "Middle Eastern",
-    ingredients: [
-      "chickpeas",
-      "tahini",
-      "garlic",
-      "lemon juice",
-      "olive oil"
-    ],
-    pricePerServing: 1.5,
-    popularity: 95
-  },
-  {
-    id: 6,
-    title: "Quick Avocado Toast",
-    image: "./chicken.webp",
-    readyInMinutes: 5,
-    servings: 1,
-    sourceUrl: "https://example.com/quick-avocado-toast",
-    diets: ["vegan"],
-    cuisine: "Mediterranean",
-    ingredients: [
-      "bread",
-      "avocado",
-      "lemon juice",
-      "salt"
-    ],
-    pricePerServing: 2.0,
-    popularity: 90
-  },
-  {
-    id: 7,
-    title: "Beef Stew",
-    image: "./chicken.webp",
-    readyInMinutes: 90,
-    servings: 5,
-    sourceUrl: "https://example.com/beef-stew",
-    diets: [],
-    cuisine: "European",
-    ingredients: [
-      "beef chunks",
-      "potatoes",
-      "carrots",
-      "onion",
-      "garlic",
-      "tomato paste",
-      "beef broth",
-      "red wine",
-      "bay leaves",
-      "thyme",
-      "salt",
-      "black pepper",
-      "butter",
-      "flour",
-      "celery",
-      "mushrooms"
-    ],
-    pricePerServing: 5.5,
-    popularity: 80
-  }
-]
+// This is where I store recipes globally
+let allRecipes = []
+let filteredRecipes = []
 
-//declaring my variables
-const btnDiet = document.querySelectorAll('.btn-filter')
-const sortBtn = document.querySelectorAll('.btn-sort')
-const surpriseBtn = document.getElementById('randomBtn')
-const displayMessage = document.getElementById('displayMessage')
-const cardContainer = document.getElementById('cards')
-let filteredRecipes = [...recipes]
+// Fetch from API
+const fetchRecipes = () => {
+  const URL = 'https://api.spoonacular.com/recipes/random?number=8&apiKey=828d006a0acb420f85701f9da607c995'
 
-//function to load all recipes
-const loadRecipes = (recipesToDisplay) => {
+  fetch(URL)
+    .then(response => response.json())
+    .then(data => {
+      allRecipes = data.recipes
+      filteredRecipes = [...allRecipes]
+      displayRecipes(filteredRecipes)
+    })
+    .catch((error) => {
+      document.getElementById('errorMessage').innerHTML = `<p>Uh oh! There is a problem when searching for recipes, please try again later. ✨</p> 
+      <p>${error} </p>`
+      console.error('Error:', error)
+    })
+}
+//display fetched recipes
+const displayRecipes = (recipesToDisplay) => {
+  const cardContainer = document.querySelector('#cards')
   cardContainer.innerHTML = ''
+
   recipesToDisplay.forEach(recipe => {
-    cardContainer.innerHTML +=
-      `<div class="card">
+    // Build diet labels dynamically (only show when true)
+    let dietLabels = []
+    if (recipe.vegan) dietLabels.push("Vegan")
+    if (recipe.vegetarian) dietLabels.push("Vegetarian")
+    if (recipe.glutenFree) dietLabels.push("Gluten Free")
+    if (recipe.dairyFree) dietLabels.push("Dairy Free")
+
+    cardContainer.innerHTML += `
+      <div class="card">
         <div class="card-image">
-          <img src="./img/veganplate.webp" alt="Vegan plate" id="cardImage"/>
+          <img src="${recipe.image}" alt="Recipe image"/>
         </div>
         <h2>${recipe.title}</h2>
         <div class="instructions">
           <h3 class="title">Diet:</h3>
-          <p>${recipe.diets.join(", ")}</p>
+          <p>${dietLabels.length > 0 ? dietLabels.join(", ") : "No specific diet"}</p>
         </div>
         <div class="instructions">
           <h3 class="title">Time:</h3>
@@ -190,66 +49,65 @@ const loadRecipes = (recipesToDisplay) => {
         <div class="ingredients">
           <h4 class="title">Ingredient list:</h4>
           <ul>
-            ${recipe.ingredients.map(ingredient => `<li>${ingredient}</li>`).join("")}
+            ${recipe.extendedIngredients.map(ingredient =>
+      `<li>${ingredient.original}</li>`).join("")}
           </ul>
         </div>
+        <a href="${recipe.sourceUrl}" target="_blank" class="recipe-link">View Full Recipe</a>
       </div>`
   })
 }
 
-//function to filter recipes by diet choice
-const filterByDiet = () => {
-  const selectedDiet = document.querySelector('input[name="diet"]:checked').value
-
-  if (selectedDiet === 'all') {
-    filteredRecipes = [...recipes]
+// Function to filter recipes based on diet
+const filterByDiet = (filterType) => {
+  if (filterType === "all") {
+    filteredRecipes = [...allRecipes]
   } else {
-    filteredRecipes = recipes.filter(recipe => recipe.diets.includes(selectedDiet))
+    filteredRecipes = allRecipes.filter(recipe => recipe[filterType] === true)
   }
 
-  // Show a message when a filter with no recipe is found
-  if (selectedDiet !== 'all' && filteredRecipes.length === 0) {
-    displayMessage.innerHTML = "🍲  ❌ Oh no! No recipes found. Try another filter!"
-    displayMessage.style.display = "block"
-  } else if (filteredRecipes.length > 0) {
-    displayMessage.style.display = "none" // Hide message if recipes are found
+  if (filteredRecipes.length === 0) {
+    document.querySelector('#cards').innerHTML = `<p>❌ No ${filterType} recipes found. Why don't you pick another one?✨ </p>`
+  } else {
+    displayRecipes(filteredRecipes)
   }
-
-  loadRecipes(filteredRecipes)
 }
 
-//function to sort recipes on popularity
-const filterByPopularity = (number) => {
-  const sortedRecipes = [...filteredRecipes]
-
-  if (number === 'descending') {
-    sortedRecipes.sort((a, b) => a.popularity - b.popularity)
+// Function to sort recipes by readyInMinutes
+const sortByReadyTime = (order) => {
+  if (order === 'ascending') {
+    filteredRecipes.sort((a, b) => a.readyInMinutes - b.readyInMinutes)
   } else {
-    sortedRecipes.sort((a, b) => b.popularity - a.popularity)
+    filteredRecipes.sort((a, b) => b.readyInMinutes - a.readyInMinutes)
   }
 
-  loadRecipes(sortedRecipes)
+  displayRecipes(filteredRecipes)
 }
 
-//function for picking a random recipe
+// Function to pick and display a random recipe
 const surpriseMe = () => {
-  const randomRecipe = recipes[Math.floor(Math.random() * recipes.length)]
-  loadRecipes([randomRecipe])
+  if (allRecipes.length > 0) {
+    const randomRecipe = allRecipes[Math.floor(Math.random() * allRecipes.length)]
+    displayRecipes([randomRecipe]) // Display only the selected random recipe
+  }
 }
 
-//eventlisteners
-btnDiet.forEach(button => {
-  button.addEventListener("change", filterByDiet)
-})
-
-sortBtn.forEach(button => {
-  button.addEventListener("change", (button) => {
-    const numberValue = button.target.value
-    filterByPopularity(numberValue)
+// Event listeners for diet filters
+document.querySelectorAll('.btn-filter input').forEach(button => {
+  button.addEventListener("change", (event) => {
+    filterByDiet(event.target.value)
   })
 })
 
-surpriseBtn.addEventListener('click', surpriseMe)
+// Event listeners for sorting by time
+document.querySelectorAll('.btn-sort input').forEach(button => {
+  button.addEventListener("change", (event) => {
+    sortByReadyTime(event.target.value)
+  })
+})
 
-//always load all recipes from the start
-loadRecipes(filteredRecipes)
+// Event listener for the "Surprise Me" button
+document.querySelector('#randomBtn').addEventListener("click", surpriseMe)
+
+// Fetch and display recipes on page load
+fetchRecipes()

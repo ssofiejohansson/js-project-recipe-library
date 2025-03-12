@@ -97,7 +97,7 @@ label input {
 
 .card-parent {
   display: grid;
-  justify-content: start;
+  justify-content: center;
   align-content: space-around;
   gap: 24px;
   grid-template-columns: repeat(auto-fit, minmax(260px, 280px));

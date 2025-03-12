@@ -56,74 +56,36 @@
           <input
             type="radio"
             name="diet"
-            value="gluten-free"
+            value="glutenFree"
           > 🌾 Gluten-Free
         </label>
         <label class="button btn-filter">
           <input
             type="radio"
             name="diet"
-            value="dairy-free"
+            value="dairyFree"
           > 🧀 Dairy-Free
         </label>
       </div>
 
       <div class="form">
-        <p>Sort by popularity</p>
+        <p>Sort by Time</p>
         <label class="button btn-sort">
           <input
             type="radio"
             name="timeFilter"
             value="ascending"
-          > Most popular 🏆
+          > 🕑 A quick one
         </label>
         <label class="button btn-sort">
           <input
             type="radio"
             name="timeFilter"
             value="descending"
-          > Hidden gems 💎
+          > ⏳ I got time!
         </label>
       </div>
     </form>
-
-    <!-- Cooking Time Filter Form
-    <form id="cookingTimeFilterForm">
-      <div class="form">
-        <p>Filter on Cooking Time</p>
-        <label class="button btn-filter">
-          <input
-            type="checkbox"
-            name="cookingTime"
-            value="Under 15 min"
-          > 🕒 <
-            15
-            min
-            </label
-          >
-            <label class="button btn-filter">
-              <input
-                type="checkbox"
-                name="cookingTime"
-                value="15-30 min"
-              > 🕑 15-30 min
-            </label>
-            <label class="button btn-filter">
-              <input
-                type="checkbox"
-                name="cookingTime"
-                value="30-60 min"
-              > 🕛 30-60 min
-            </label>
-            <label class="button btn-filter">
-              <input
-                type="checkbox"
-                name="cookingTime"
-                value="Over 60 min"
-              > 🕓 60 min >
-            </label>
-      </div>
-    </form> -->
 
     <div>
       <p>In need for Inspo?</p>
@@ -132,17 +94,15 @@
         id="randomBtn"
       >✨ Surprise me ✨</button>
 
-      <p
-        class="title"
-        id="displayMessage"
-      >
-      </p>
+      <div id="errorMessage"></div>
     </div>
 
     <div
       id="cards"
       class="card-parent"
-    ></div>
+    >
+      <p>⏳ Loading recipes...</p>
+    </div>
 
   </main>
 
