@@ -31,6 +31,49 @@ form {
   display: none;
 }
 
+/* hide the instructions in the card */
+.instructionList {
+  display: none;
+}
+
+/* pop up loading message */
+#loadingMessage {
+  display: none;
+  position: fixed;
+  width: 250px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#loadingText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.animation {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* button/radio input styling */
 .button {
   display: inline-block;
@@ -144,10 +187,8 @@ a:hover {
 }
 
 h2 {
-  border-bottom: 1px solid #E9E9E9;
   padding: 16px 0;
 }
-
 
 .title {
   font-size: 18px;
@@ -160,20 +201,34 @@ button {
   font-size: 16px;
 }
 
+hr {
+  border: 1px solid #E9E9E9;
+}
+
 ul {
   list-style: none;
   margin-left: 0;
   padding-left: 0;
 }
 
-
 .instructions {
   display: flex;
   align-items: center;
+  padding: 5px 5px;
 }
 
 .ingredients {
-  border-top: 1px solid #E9E9E9;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: #0018A4;
+  margin: 10px 5px;
+}
+
+a:hover {
+  border-bottom: 2px solid #0018A4;
 }
 
 footer {

@@ -4,10 +4,7 @@ let filteredRecipes = []
 
 // Fetch from API
 const fetchRecipes = () => {
-  const URL = 'https://api.spoonacular.com/recipes/random?number=2&apiKey=427f448f971e4dcea73ae654c0850b2a'
-
-  const loadingMessage = document.querySelector('#loadingMessage')
-  loadingMessage.style.display = 'block'
+  const URL = 'https://api.spoonacular.com/recipes/random?number=8&apiKey=828d006a0acb420f85701f9da607c995'
 
   fetch(URL)
     .then(response => response.json())
@@ -15,13 +12,11 @@ const fetchRecipes = () => {
       allRecipes = data.recipes
       filteredRecipes = [...allRecipes]
       displayRecipes(filteredRecipes)
-      loadingMessage.style.display = 'none'
     })
     .catch((error) => {
       document.getElementById('errorMessage').innerHTML = `<h2>Uh oh! There is a problem when searching for recipes, please try again later. ✨</h2> 
-      <p>${error.message} </p>`
+      <p>${error} </p>`
       console.error('Error:', error)
-      //loadingMessage.style.display = 'none'
     })
 }
 //Display fetched recipes
@@ -39,41 +34,27 @@ const displayRecipes = (recipesToDisplay) => {
 
     cardContainer.innerHTML += `
       <div class="card">
-      <div class="card-image">
-        <img
-          src="${recipe.image}"
-          alt="Recipe image"
-        />
-      </div>
-      <h2>${recipe.title}</h2>
-      <hr>
-      <div class="instructions">
-        <h3 class="title">Diet:</h3>
-        <p>${dietLabels.length > 0 ? dietLabels.join(", ") : "No specific diet"}</p>
-      </div>
-      <div class="instructions">
-        <h3 class="title">Time:</h3>
-        <p>${recipe.readyInMinutes} min</p>
-      </div>
-      <hr>
-      <div class="ingredients">
-        <h4 class="title">Ingredient list:</h4>
-        <ul>
-          ${recipe.extendedIngredients.map(ingredient =>
+        <div class="card-image">
+          <img src="${recipe.image}" alt="Recipe image"/>
+        </div>
+        <h2>${recipe.title}</h2>
+        <div class="instructions">
+          <h3 class="title">Diet:</h3>
+          <p>${dietLabels.length > 0 ? dietLabels.join(", ") : "No specific diet"}</p>
+        </div>
+        <div class="instructions">
+          <h3 class="title">Time:</h3>
+          <p>${recipe.readyInMinutes} min</p>
+        </div>
+        <div class="ingredients">
+          <h4 class="title">Ingredient list:</h4>
+          <ul>
+            ${recipe.extendedIngredients.map(ingredient =>
       `<li>${ingredient.original}</li>`).join("")}
-        </ul>
-      </div>
-      <button class="button btn-random instructionsBtn">🍽️ Recipe instructions⬇️</button>
-      <div class="instructionList" style="display: none;">
-        <p>${recipe.instructions}</p>
-      </div>
-      <hr>
-        <a
-          href="${recipe.sourceUrl}"
-          target="_blank"
-          class="recipe-link"
-        >🔗 View Full Recipe</a>
-    </div>`
+          </ul>
+        </div>
+        <a href="${recipe.sourceUrl}" target="_blank" class="recipe-link">View Full Recipe</a>
+      </div>`
   })
 }
 
@@ -125,17 +106,6 @@ document.querySelectorAll('.btn-sort input').forEach(button => {
 })
 
 document.querySelector('#randomBtn').addEventListener("click", surpriseMe)
-
-//click button to show instructions for recipes
-document.addEventListener('click', (event) => {
-  if (event.target.classList.contains('instructionsBtn')) {
-    const instructionDiv = event.target.nextElementSibling
-
-    if (instructionDiv && instructionDiv.classList.contains('instructionList')) {
-      instructionDiv.style.display = instructionDiv.style.display === 'none' ? 'block' : 'none'
-    }
-  }
-})
 
 // Display recipes
 fetchRecipes()
