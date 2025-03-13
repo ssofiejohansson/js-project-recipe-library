@@ -4,7 +4,7 @@ let filteredRecipes = []
 
 // Fetch from API
 const fetchRecipes = () => {
-  const URL = 'https://api.spoonacular.com/recipes/random?number=2&apiKey=427f448f971e4dcea73ae654c0850b2a'
+  const URL = 'https://api.spoonacular.com/recipes/random?number=4&apiKey=427f448f971e4dcea73ae654c0850b2a'
 
   const loadingMessage = document.querySelector('#loadingMessage')
   loadingMessage.style.display = 'block'
@@ -20,8 +20,8 @@ const fetchRecipes = () => {
     .catch((error) => {
       document.getElementById('errorMessage').innerHTML = `<h2>Uh oh! There is a problem when searching for recipes, please try again later. ✨</h2> 
       <p>${error.message} </p>`
-      console.error('Error:', error)
-      //loadingMessage.style.display = 'none'
+
+      loadingMessage.style.display = 'none'
     })
 }
 //Display fetched recipes
@@ -38,7 +38,7 @@ const displayRecipes = (recipesToDisplay) => {
     if (recipe.dairyFree) dietLabels.push("Dairy Free")
 
     cardContainer.innerHTML += `
-      <div class="card">
+      <article class="card">
       <div class="card-image">
         <img
           src="${recipe.image}"
@@ -63,7 +63,7 @@ const displayRecipes = (recipesToDisplay) => {
       `<li>${ingredient.original}</li>`).join("")}
         </ul>
       </div>
-      <button class="button btn-random instructionsBtn">🍽️ Recipe instructions⬇️</button>
+      <button class="button btn-random instructionsBtn">🍽️ Recipe instructions ⬇️</button>
       <div class="instructionList" style="display: none;">
         <p>${recipe.instructions}</p>
       </div>
@@ -73,7 +73,7 @@ const displayRecipes = (recipesToDisplay) => {
           target="_blank"
           class="recipe-link"
         >🔗 View Full Recipe</a>
-    </div>`
+    </article>`
   })
 }
 
