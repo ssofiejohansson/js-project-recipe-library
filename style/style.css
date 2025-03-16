@@ -150,7 +150,7 @@ label input {
   justify-content: center;
   align-content: space-around;
   gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 280px));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 290px));
   padding: 16px 6px;
 }
 
