@@ -4,7 +4,7 @@ let filteredRecipes = []
 
 // Fetch from API
 const fetchRecipes = () => {
-  const URL = 'https://api.spoonacular.com/recipes/random?number=24&apiKey=427f448f971e4dcea73ae654c0850b2a'
+  const URL = 'https://api.spoonacular.com/recipes/random?number=2&apiKey=427f448f971e4dcea73ae654c0850b2a'
 
   const loadingMessage = document.querySelector('#loadingMessage')
   loadingMessage.style.display = 'block'
@@ -63,7 +63,7 @@ const displayRecipes = (recipesToDisplay) => {
       `<li>${ingredient.original}</li>`).join("")}
         </ul>
       </div>
-      <button class="button btn-random instructionsBtn">🍽️ Recipe instructions ⬇️</button>
+      <button class="button btn-random instructionsBtn">⬇️ Recipe instructions</button>
       <div class="instructionList" style="display: none;">
         <p>${recipe.instructions}</p>
       </div>
