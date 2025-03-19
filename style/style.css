@@ -159,7 +159,7 @@ label input {
   background-color: #FF6589;
   color: #FFFFFF;
   border: 2px solid #FF6589;
-  margin: 12px 0;
+  margin: 16px 6px;
 }
 
 .btn-random:hover {
@@ -175,11 +175,10 @@ label input {
 /* Cards styling */
 .card-parent {
   display: grid;
-  justify-content: center;
-  align-content: space-around;
-  gap: 16px;
+  justify-content: space-evenly;
+  gap: 12px;
   grid-template-columns: repeat(auto-fit, minmax(260px, 290px));
-  padding: 16px 6px;
+  padding: 24px 0px;
 }
 
 .card {
