@@ -4,27 +4,59 @@ let filteredRecipes = []
 
 // Fetch from API
 const fetchRecipes = () => {
+
   const URL = 'https://api.spoonacular.com/recipes/random?number=24&apiKey=427f448f971e4dcea73ae654c0850b2a'
 
   const loadingMessage = document.querySelector('#loadingMessage')
+  const errorMessage = document.getElementById('errorMessage')
+
+  // Show loading message while fetching
   loadingMessage.style.display = 'block'
+  errorMessage.innerHTML = ''
 
   fetch(URL)
     .then(response => response.json())
     .then(data => {
+      // If API limit is reached, show error message
+      if (data.code === 402) {
+        errorMessage.innerHTML = `
+          <h2>Uh oh! You've reached the daily limit of recipe requests. ✨</h2>
+          <p>Why don't you try again tomorrow?</p>`
+        throw new Error("You've reached the daily limit of recipe requests.")
+      }
+
       allRecipes = data.recipes
       filteredRecipes = [...allRecipes]
+
+      // Save the recipes in local storage
+      localStorage.setItem('recipes', JSON.stringify(allRecipes))
+
       displayRecipes(filteredRecipes)
-      loadingMessage.style.display = 'none'
     })
     .catch((error) => {
-      document.getElementById('errorMessage').innerHTML = `<h2>Uh oh! There is a problem when searching for recipes, please try again later. ✨</h2> 
-      <p>${error.message} </p>`
+      console.error(error.message)
 
+      // If API runs out, try loading from local storage
+      const cachedRecipes = localStorage.getItem('recipes')
+      if (cachedRecipes) {
+        allRecipes = JSON.parse(cachedRecipes)
+        filteredRecipes = [...allRecipes]
+        displayRecipes(filteredRecipes)
+      } else {
+        // Show error message when no cached recipes exist
+        errorMessage.innerHTML = `
+          <h2>Uh oh! There is a problem when searching for recipes. ✨</h2> 
+          <p>${error.message}</p>`
+      }
+    })
+    .finally(() => {
+      // Hide loading message when request finish
       loadingMessage.style.display = 'none'
     })
 }
-//Display fetched recipes
+
+
+//Display fetched recipes in my card container
 const displayRecipes = (recipesToDisplay) => {
   const cardContainer = document.querySelector('#cards')
   cardContainer.innerHTML = ''
@@ -32,6 +64,8 @@ const displayRecipes = (recipesToDisplay) => {
   recipesToDisplay.forEach(recipe => {
 
     let dietLabels = []
+
+    //checks what diet the recipe is and adds it to the dietLabels array above
     if (recipe.vegan) dietLabels.push("Vegan")
     if (recipe.vegetarian) dietLabels.push("Vegetarian")
     if (recipe.glutenFree) dietLabels.push("Gluten Free")
@@ -103,6 +137,17 @@ const sortByReadyTime = (order) => {
   displayRecipes(filteredRecipes)
 }
 
+//click button to show instructions for recipes
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('instructionsBtn')) {
+    const instructionDiv = event.target.nextElementSibling
+
+    if (instructionDiv && instructionDiv.classList.contains('instructionList')) {
+      instructionDiv.style.display = instructionDiv.style.display === 'none' ? 'block' : 'none'
+    }
+  }
+})
+
 // Function to display a random recipe
 const surpriseMe = () => {
   if (allRecipes.length > 0) {
@@ -125,17 +170,6 @@ document.querySelectorAll('.btn-sort input').forEach(button => {
 })
 
 document.querySelector('#randomBtn').addEventListener("click", surpriseMe)
-
-//click button to show instructions for recipes
-document.addEventListener('click', (event) => {
-  if (event.target.classList.contains('instructionsBtn')) {
-    const instructionDiv = event.target.nextElementSibling
-
-    if (instructionDiv && instructionDiv.classList.contains('instructionList')) {
-      instructionDiv.style.display = instructionDiv.style.display === 'none' ? 'block' : 'none'
-    }
-  }
-})
 
 // Display recipes
 fetchRecipes()
