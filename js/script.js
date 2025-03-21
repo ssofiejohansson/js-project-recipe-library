@@ -12,6 +12,7 @@ const fetchRecipes = () => {
 
   // Show loading message while fetching
   loadingMessage.style.display = 'block'
+
   errorMessage.innerHTML = ''
 
   fetch(URL)
@@ -21,7 +22,7 @@ const fetchRecipes = () => {
       if (data.code === 402) {
         errorMessage.innerHTML = `
           <h2>Uh oh! You've reached the daily limit of recipe requests. ✨</h2>
-          <p>Why don't you try again tomorrow?</p>`
+          <p>Here are some saved recipes for you, but come back tomorrow if you want to get more!</p>`
         throw new Error("You've reached the daily limit of recipe requests.")
       }
 
@@ -45,12 +46,12 @@ const fetchRecipes = () => {
       } else {
         // Show error message when no cached recipes exist
         errorMessage.innerHTML = `
-          <h2>Uh oh! There is a problem when searching for recipes. ✨</h2> 
+          <h2>Uh oh! There is a problem when loading recipes. Come back tomorrow. ✨</h2> 
           <p>${error.message}</p>`
       }
     })
     .finally(() => {
-      // Hide loading message when request finish
+      // Hide loading message when request finish so its not showing all the time
       loadingMessage.style.display = 'none'
     })
 }
@@ -156,7 +157,7 @@ const surpriseMe = () => {
   }
 }
 
-// Event listeners
+// All event listeners
 document.querySelectorAll('.btn-filter input').forEach(button => {
   button.addEventListener("change", (event) => {
     filterByDiet(event.target.value)
@@ -171,5 +172,5 @@ document.querySelectorAll('.btn-sort input').forEach(button => {
 
 document.querySelector('#randomBtn').addEventListener("click", surpriseMe)
 
-// Display recipes
+// Display recipes from the start
 fetchRecipes()
